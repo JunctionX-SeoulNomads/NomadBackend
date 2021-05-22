@@ -1,32 +1,41 @@
 package com.example.servingwebcontent;
 
+
 import com.example.data.Cluster;
 import com.example.data.Coordinate;
+import com.example.data.Status;
 import com.example.servingwebcontent.components.Hierarchy;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserRequestRestController {
+public class DriverRequestRestController {
     private final Hierarchy hierarchy;
 
     @Autowired
-    UserRequestRestController(Hierarchy hierarchy) {
+    DriverRequestRestController(Hierarchy hierarchy) {
         this.hierarchy = hierarchy;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/driver", method = RequestMethod.POST)
     @ResponseBody
-    public String processUserCoordinates(@RequestBody Coordinate coordinate) {
-        System.out.println("LOG get user coordinates :\n" +
+    public String processDriverCoordinates(@RequestBody Coordinate coordinate) {
+        System.out.println("LOG get driver coordinates :\n" +
                 "Longitude = " + coordinate.getLongitude() + "\n" +
                 "Latitude = " + coordinate.getLatitude());
 
+        int clusterStatus = 0;
         if (hierarchy.hasCluster()) {
             final Cluster nearestCluster = hierarchy.getNearestCluster(coordinate);
-            nearestCluster.incrementCounter();
+            clusterStatus = nearestCluster.getCounter();
         }
 
-        return "OK";
+        Status status = new Status(clusterStatus);
+
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(status));
+        return gson.toJson(status);
     }
+
 }

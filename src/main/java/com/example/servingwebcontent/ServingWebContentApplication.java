@@ -14,8 +14,8 @@ public class ServingWebContentApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServingWebContentApplication.class, args);
 
-        Coordinate coordinate = new Coordinate(23.46, 4544.4444);
-        Gson gson = new Gson();
-        NomadUtils.httpsPOSTRequest("http://localhost:8080/user", gson.toJson(coordinate).getBytes());
+//        Coordinate coordinate = new Coordinate(23.46, 4544.4444);
+//        Gson gson = new Gson();
+//        System.out.println(NomadUtils.httpsPOSTRequest("http://localhost:8080/driver", gson.toJson(coordinate).getBytes()));
     }
 }
