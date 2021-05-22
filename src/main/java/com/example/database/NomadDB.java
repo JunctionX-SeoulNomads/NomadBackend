@@ -5,10 +5,7 @@ import com.example.utils.TokensStorage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class NomadDB {
     private TokensStorage tokensStorage;
@@ -30,11 +27,25 @@ public class NomadDB {
     public List<Cluster> getClustersFromDB() {
         final List<Cluster> clusters = new ArrayList<>();
 
-        String SQL_SELECT_MONTHLY_STAT = "select * from SafeNomad.CounterMonthly;";
-        Map<Integer, Integer> clusterMonthlyStat =
+        String SQL_SELECT_MONTHLY_STAT = "select cluster_id, sum(count) from SafeNomad.CounterMonthly group by cluster_id";
+        Map<Integer, Integer> clusterMonthlyStat = new HashMap<>();
+
+        try {
+            ResultSet resultSet = dbConnection.executeSearchQuery(SQL_SELECT_MONTHLY_STAT);
+
+            while (resultSet.next()) {
+                int clusterId = resultSet.getInt(1);
+                int sum = resultSet.getInt(2);
+                System.out.println("clusterId : " + clusterId);
+                System.out.println("sum of count : " + sum);
+                System.out.println("--");
+                clusterMonthlyStat.put(clusterId, sum);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         String SQL_SELECT = "SELECT * FROM SafeNomad.Cluster;";
-
         try {
             ResultSet resultSet = dbConnection.executeSearchQuery(SQL_SELECT);
 
