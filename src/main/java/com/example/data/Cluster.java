@@ -11,47 +11,59 @@ import java.util.concurrent.atomic.AtomicInteger;
  * It's represents throw it's coordinates
  */
 public class Cluster {
-    private AtomicInteger counter; // keep statistics about cluster
-    private ConcurrentLinkedDeque<Coordinate> identificationCoordinates;
+    private int clusterId;
+    private int monthlyStatistic; // keep monthly statistic
+    private AtomicInteger aliveCounter; // keep statistics about cluster
+    private AtomicInteger dailyCounter; // keep number of daily visited users
+    private Coordinate clusterCoordinates;
 
     Cluster() {
-        counter = new AtomicInteger(0);
-        identificationCoordinates = new ConcurrentLinkedDeque<>();
+        clusterId = 0;
+        aliveCounter = new AtomicInteger(0);
+        dailyCounter = new AtomicInteger(0);
+        monthlyStatistic = 0;
+        clusterCoordinates = new Coordinate();
     }
 
-    Cluster(@NotNull final AtomicInteger counter, @NotNull final List<Coordinate> coordinates) {
-        this.counter = new AtomicInteger(counter.get());
-        identificationCoordinates = new ConcurrentLinkedDeque<>();
-        identificationCoordinates.addAll(coordinates);
-    }
-
-
-    public void addIdentificationPoint(@NotNull final Coordinate coordinate) {
-        identificationCoordinates.add(coordinate);
+    Cluster(final int clusterId,
+            final int monthlyStatistic,
+            @NotNull final AtomicInteger aliveCounter,
+            @NotNull final AtomicInteger dailyCounter,
+            @NotNull final Coordinate clusterCoordinates) {
+        this.clusterId = clusterId;
+        this.monthlyStatistic = monthlyStatistic;
+        this.aliveCounter = new AtomicInteger(aliveCounter.get());
+        this.dailyCounter = new AtomicInteger(dailyCounter.get());
+        this.clusterCoordinates = new Coordinate(clusterCoordinates.getLongitude(), clusterCoordinates.getLatitude());
     }
 
     /** Calculate the distance between this cluster and giver targetPoint using identifications points of that cluster*/
     public double getDistanceToTargetPoint(@NotNull final Coordinate targetPoint) {
-        if (identificationCoordinates.isEmpty()) {
-            return -1;
-        }
-
-        double minimumDistance = identificationCoordinates.getFirst().calcDistanceToPoint(targetPoint);
-        for (final Coordinate identificationPoint : identificationCoordinates) {
-            final double currentDistance = identificationPoint.calcDistanceToPoint(targetPoint);
-            if (currentDistance < minimumDistance) {
-                minimumDistance = currentDistance;
-            }
-        }
-
-        return minimumDistance;
+        return clusterCoordinates.calcDistanceToPoint(targetPoint);
     }
 
-    public void incrementCounter() {
-        counter.incrementAndGet();
+    public Cluster incrementAliveCounter() {
+        aliveCounter.incrementAndGet();
+        dailyCounter.incrementAndGet();
+        return this;
     }
 
-    public int getCounter() {
-        return counter.get();
+    public Cluster decrementAliveCounter() {
+        aliveCounter.decrementAndGet();
+        return this;
+    }
+
+    public int getAliveCounter() {
+        return aliveCounter.get();
+    }
+
+    public int getMonthlyStatistic() { return monthlyStatistic; }
+
+    public int getClusterId() {
+        return clusterId;
+    }
+
+    public void setClusterId(int clusterId) {
+        this.clusterId = clusterId;
     }
 }

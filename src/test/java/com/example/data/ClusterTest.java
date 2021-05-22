@@ -10,6 +10,6 @@ public class ClusterTest {
     public void canCreateCluster() {
         final Cluster cluster = new Cluster();
 
-        assertEquals(0, cluster.getCounter());
+        assertEquals(0, cluster.getAliveCounter());
     }
 }

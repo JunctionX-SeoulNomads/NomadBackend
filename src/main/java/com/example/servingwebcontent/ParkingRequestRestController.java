@@ -10,32 +10,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class DriverRequestRestController {
+public class ParkingRequestRestController {
+
     private final Hierarchy hierarchy;
 
     @Autowired
-    DriverRequestRestController(Hierarchy hierarchy) {
+    ParkingRequestRestController(Hierarchy hierarchy) {
         this.hierarchy = hierarchy;
     }
 
-    @RequestMapping(value = "/driver", method = RequestMethod.POST)
+    @RequestMapping(value = "/parking", method = RequestMethod.POST)
     @ResponseBody
     public String processDriverCoordinates(@RequestBody Coordinate coordinate) {
-        System.out.println("LOG get driver coordinates :\n" +
+        System.out.println("LOG get parking coordinates :\n" +
                 "Longitude = " + coordinate.getLongitude() + "\n" +
                 "Latitude = " + coordinate.getLatitude());
 
-        int clusterStatus = 0;
+        int clusterMonthlyStatistics = 0;
         if (hierarchy.hasCluster()) {
             final Cluster nearestCluster = hierarchy.getNearestCluster(coordinate);
-            clusterStatus = nearestCluster.getAliveCounter();
+            clusterMonthlyStatistics = nearestCluster.getMonthlyStatistic();
         }
 
-        Status status = new Status(clusterStatus);
-
+        Status status = new Status(clusterMonthlyStatistics);
         Gson gson = new Gson();
-        System.out.println(gson.toJson(status));
+        System.out.println("from parking : " + gson.toJson(status));
         return gson.toJson(status);
     }
-
 }
