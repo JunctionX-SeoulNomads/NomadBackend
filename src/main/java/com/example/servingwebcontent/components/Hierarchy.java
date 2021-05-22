@@ -2,6 +2,7 @@ package com.example.servingwebcontent.components;
 
 import com.example.data.Cluster;
 import com.example.data.Coordinate;
+import com.example.data.UserComplain;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -69,6 +70,12 @@ public class Hierarchy {
 
     public Hierarchy setUserClusterIdByUserId(@NotNull final String userId, final int clusterId) {
         clusterIdByUserId.put(userId, clusterId);
+        return this;
+    }
+
+    /** method for saving complains */
+    public Hierarchy saveComplain(@NotNull final UserComplain complain, @NotNull final Cluster nearestCluster) {
+        //TODO implement complain saving
         return this;
     }
 }
