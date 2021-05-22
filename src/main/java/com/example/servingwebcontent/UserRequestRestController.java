@@ -23,6 +23,10 @@ public class UserRequestRestController {
             nearestCluster.incrementCounter();
         }
 
+        System.out.println("LOG get user coordinates :\n" +
+                "Longitude = " + coordinate.getLongitude() + "\n" +
+                "Latitude = " + coordinate.getLatitude());
+
         return "OK";
     }
 }

@@ -9,12 +9,12 @@ public class Coordinate {
     private double longitude;
     private double latitude;
 
-    Coordinate() {
+    public Coordinate() {
         longitude = 0.;
         latitude = 0.;
     }
 
-    Coordinate(double longitude, double latitude) {
+    public Coordinate(double longitude, double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
