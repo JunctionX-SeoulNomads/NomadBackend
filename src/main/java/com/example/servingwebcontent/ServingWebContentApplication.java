@@ -1,10 +1,5 @@
 package com.example.servingwebcontent;
 
-import com.example.NomadUtils;
-import com.example.data.Coordinate;
-import com.example.data.NomadUser;
-import com.example.data.UserComplain;
-import com.google.gson.Gson;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;

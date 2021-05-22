@@ -28,6 +28,7 @@ public class Hierarchy {
 
     /** load information about clusters from database */
     public Hierarchy loadClustersInfoFromDatabase() {
+
         return this;
     }
 

@@ -17,7 +17,7 @@ public class Cluster {
     private AtomicInteger dailyCounter; // keep number of daily visited users
     private Coordinate clusterCoordinates;
 
-    Cluster() {
+    public Cluster() {
         clusterId = 0;
         aliveCounter = new AtomicInteger(0);
         dailyCounter = new AtomicInteger(0);
