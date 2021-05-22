@@ -1,6 +1,7 @@
 package com.example.database;
 
 import com.example.data.Cluster;
+import com.example.data.Coordinate;
 import com.example.utils.TokensStorage;
 
 import java.sql.ResultSet;
@@ -56,8 +57,9 @@ public class NomadDB {
                 System.out.println("clusterId : " + clusterId);
                 System.out.println("longitude : " + longitude);
                 System.out.println("latitude : " + latitude);
-
-                Cluster cluster = new Cluster();
+                Coordinate coor = new Coordinate(longitude, latitude);
+                Cluster cluster = new Cluster(clusterId, clusterMonthlyStat.get(clusterId), 0, 0, coor);
+                clusters.add(cluster);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

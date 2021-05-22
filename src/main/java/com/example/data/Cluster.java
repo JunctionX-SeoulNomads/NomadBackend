@@ -25,15 +25,15 @@ public class Cluster {
         clusterCoordinates = new Coordinate();
     }
 
-    Cluster(final int clusterId,
-            final int monthlyStatistic,
-            @NotNull final AtomicInteger aliveCounter,
-            @NotNull final AtomicInteger dailyCounter,
-            @NotNull final Coordinate clusterCoordinates) {
+    public Cluster(final int clusterId,
+                   final int monthlyStatistic,
+                   @NotNull final int aliveCounter,
+                   @NotNull final int dailyCounter,
+                   @NotNull final Coordinate clusterCoordinates) {
         this.clusterId = clusterId;
         this.monthlyStatistic = monthlyStatistic;
-        this.aliveCounter = new AtomicInteger(aliveCounter.get());
-        this.dailyCounter = new AtomicInteger(dailyCounter.get());
+        this.aliveCounter = new AtomicInteger(aliveCounter);
+        this.dailyCounter = new AtomicInteger(dailyCounter);
         this.clusterCoordinates = new Coordinate(clusterCoordinates.getLongitude(), clusterCoordinates.getLatitude());
     }
 

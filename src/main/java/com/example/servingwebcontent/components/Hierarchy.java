@@ -3,6 +3,7 @@ package com.example.servingwebcontent.components;
 import com.example.data.Cluster;
 import com.example.data.Coordinate;
 import com.example.data.UserComplain;
+import com.example.database.NomadDB;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -24,11 +25,17 @@ public class Hierarchy {
         clustersList = new ArrayList<>();
         clusterIdByUserId = new HashMap<>();
         clusterById = new HashMap<>();
+        loadClustersInfoFromDatabase();
     }
 
     /** load information about clusters from database */
     public Hierarchy loadClustersInfoFromDatabase() {
-
+        NomadDB db = new NomadDB();
+        List<Cluster> clusters = db.getClustersFromDB();
+        for (int i = 0; i < clusters.size(); i++) {
+            clustersList.add(clusters.get(i));
+            clusterById.put(clusters.get(i).getClusterId(), clusters.get(i));
+        }
         return this;
     }
 
