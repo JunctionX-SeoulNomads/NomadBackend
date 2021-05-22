@@ -36,6 +36,7 @@ public class Hierarchy {
             clustersList.add(clusters.get(i));
             clusterById.put(clusters.get(i).getClusterId(), clusters.get(i));
         }
+        System.out.println("Hierarchy::: loaded " + clusters.size() + " from remote database");
         return this;
     }
 

@@ -33,7 +33,7 @@ public class DatabaseConnectionAwsImpl implements DatabaseConnection {
 
     @Override
     public boolean executeQuery(final @NotNull String query) {
-        System.out.println(" Azure query : " + query);
+        System.out.println(" AWS query : " + query);
         try {
             return connection.prepareStatement(query).execute();
         } catch (SQLException throwables) {
@@ -44,7 +44,7 @@ public class DatabaseConnectionAwsImpl implements DatabaseConnection {
 
     @Override
     public @Nullable ResultSet executeSearchQuery(@NotNull String query) {
-        System.out.println(" Azure query : " + query);
+        System.out.println(" AWS query : " + query);
         try {
             return connection.prepareCall(query).executeQuery();
         } catch (SQLException throwables) {

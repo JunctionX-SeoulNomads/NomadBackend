@@ -27,8 +27,8 @@ public class Cluster {
 
     public Cluster(final int clusterId,
                    final int monthlyStatistic,
-                   @NotNull final int aliveCounter,
-                   @NotNull final int dailyCounter,
+                   final int aliveCounter,
+                   final int dailyCounter,
                    @NotNull final Coordinate clusterCoordinates) {
         this.clusterId = clusterId;
         this.monthlyStatistic = monthlyStatistic;

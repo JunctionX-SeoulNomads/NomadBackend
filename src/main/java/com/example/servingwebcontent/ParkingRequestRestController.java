@@ -21,7 +21,7 @@ public class ParkingRequestRestController {
 
     @RequestMapping(value = "/parking", method = RequestMethod.POST)
     @ResponseBody
-    public String processDriverCoordinates(@RequestBody Coordinate coordinate) {
+    public String processParkingCoordinates(@RequestBody Coordinate coordinate) {
         System.out.println("LOG get parking coordinates :\n" +
                 "Longitude = " + coordinate.getLongitude() + "\n" +
                 "Latitude = " + coordinate.getLatitude());

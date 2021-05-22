@@ -37,9 +37,9 @@ public class NomadDB {
             while (resultSet.next()) {
                 int clusterId = resultSet.getInt(1);
                 int sum = resultSet.getInt(2);
-                System.out.println("clusterId : " + clusterId);
-                System.out.println("sum of count : " + sum);
-                System.out.println("--");
+//                System.out.println("clusterId : " + clusterId);
+//                System.out.println("sum of count : " + sum);
+//                System.out.println("--");
                 clusterMonthlyStat.put(clusterId, sum);
             }
         } catch (SQLException throwables) {
@@ -51,14 +51,16 @@ public class NomadDB {
             ResultSet resultSet = dbConnection.executeSearchQuery(SQL_SELECT);
 
             while (resultSet.next()) {
-                int clusterId = resultSet.getInt(1);
-                double longitude = resultSet.getDouble(2);
-                double latitude = resultSet.getDouble(3);
-                System.out.println("clusterId : " + clusterId);
-                System.out.println("longitude : " + longitude);
-                System.out.println("latitude : " + latitude);
-                Coordinate coor = new Coordinate(longitude, latitude);
-                Cluster cluster = new Cluster(clusterId, clusterMonthlyStat.get(clusterId), 0, 0, coor);
+                final int clusterId = resultSet.getInt(1);
+                final double longitude = resultSet.getDouble(2);
+                final double latitude = resultSet.getDouble(3);
+                final int monthlyStat = clusterMonthlyStat.getOrDefault(clusterId, 0);
+                final Coordinate clusterCenter = new Coordinate(longitude, latitude);
+//                System.out.print("clusterId : " + clusterId);
+//                System.out.print(" longitude : " + longitude);
+//                System.out.print(" latitude : " + latitude);
+//                System.out.print(" monthlyStat : " + monthlyStat);
+                final Cluster cluster = new Cluster(clusterId, monthlyStat, 0, 0, clusterCenter);
                 clusters.add(cluster);
             }
         } catch (SQLException throwables) {
