@@ -13,3 +13,4 @@ buildNumber.properties
 /.idea
 /target
 .env
+NomadBackend.iml

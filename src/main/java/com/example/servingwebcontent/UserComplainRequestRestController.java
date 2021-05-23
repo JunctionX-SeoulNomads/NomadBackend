@@ -17,7 +17,7 @@ public class UserComplainRequestRestController {
 
     @RequestMapping(value = "/complain", method = RequestMethod.POST)
     @ResponseBody
-    public String processUserCoordinates(@RequestBody UserComplain userComplain) {
+    public String processUserComplain(@RequestBody UserComplain userComplain) {
         System.out.println("LOG got complain :\n" +
                 "userId = " + userComplain.getUserId() + "\n" +
                 "Longitude = " + userComplain.getLongitude() + "\n" +

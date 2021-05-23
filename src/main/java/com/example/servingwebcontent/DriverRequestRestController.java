@@ -1,6 +1,7 @@
 package com.example.servingwebcontent;
 
 
+import com.example.Main;
 import com.example.data.Cluster;
 import com.example.data.Coordinate;
 import com.example.data.Status;
@@ -8,6 +9,8 @@ import com.example.servingwebcontent.components.Hierarchy;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Random;
 
 @RestController
 public class DriverRequestRestController {
@@ -30,6 +33,19 @@ public class DriverRequestRestController {
             final Cluster nearestCluster = hierarchy.getNearestCluster(coordinate);
             clusterStatus = nearestCluster.getAliveCounter();
         }
+
+        if (clusterStatus >= 4) {
+            clusterStatus = 4;
+        }
+        else if (clusterStatus >= 2) {
+            clusterStatus = 2;
+        }
+        else {
+            clusterStatus = 0;
+        }
+
+        Random random = new Random();
+        clusterStatus = Math.abs(random.nextInt()) % 3;
 
         Status status = new Status(clusterStatus);
 

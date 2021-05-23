@@ -17,7 +17,7 @@ public class Cluster {
     private AtomicInteger dailyCounter; // keep number of daily visited users
     private Coordinate clusterCoordinates;
 
-    Cluster() {
+    public Cluster() {
         clusterId = 0;
         aliveCounter = new AtomicInteger(0);
         dailyCounter = new AtomicInteger(0);
@@ -25,15 +25,15 @@ public class Cluster {
         clusterCoordinates = new Coordinate();
     }
 
-    Cluster(final int clusterId,
-            final int monthlyStatistic,
-            @NotNull final AtomicInteger aliveCounter,
-            @NotNull final AtomicInteger dailyCounter,
-            @NotNull final Coordinate clusterCoordinates) {
+    public Cluster(final int clusterId,
+                   final int monthlyStatistic,
+                   final int aliveCounter,
+                   final int dailyCounter,
+                   @NotNull final Coordinate clusterCoordinates) {
         this.clusterId = clusterId;
         this.monthlyStatistic = monthlyStatistic;
-        this.aliveCounter = new AtomicInteger(aliveCounter.get());
-        this.dailyCounter = new AtomicInteger(dailyCounter.get());
+        this.aliveCounter = new AtomicInteger(aliveCounter);
+        this.dailyCounter = new AtomicInteger(dailyCounter);
         this.clusterCoordinates = new Coordinate(clusterCoordinates.getLongitude(), clusterCoordinates.getLatitude());
     }
 
@@ -55,6 +55,19 @@ public class Cluster {
 
     public int getAliveCounter() {
         return aliveCounter.get();
+    }
+
+    public SimpleCluster getSimpleCluster() {
+        return new SimpleCluster(clusterId, new Coordinate(clusterCoordinates.getLongitude(), clusterCoordinates.getLatitude()));
+    }
+
+    public int getAndResetDailyCounter() {
+        int stat = 0;
+        synchronized (dailyCounter) {
+            stat = dailyCounter.get();
+            dailyCounter.set(0);
+        }
+        return stat;
     }
 
     public int getMonthlyStatistic() { return monthlyStatistic; }

@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @RestController
 public class ParkingRequestRestController {
 
@@ -21,7 +23,7 @@ public class ParkingRequestRestController {
 
     @RequestMapping(value = "/parking", method = RequestMethod.POST)
     @ResponseBody
-    public String processDriverCoordinates(@RequestBody Coordinate coordinate) {
+    public String processParkingCoordinates(@RequestBody Coordinate coordinate) {
         System.out.println("LOG get parking coordinates :\n" +
                 "Longitude = " + coordinate.getLongitude() + "\n" +
                 "Latitude = " + coordinate.getLatitude());
@@ -31,6 +33,20 @@ public class ParkingRequestRestController {
             final Cluster nearestCluster = hierarchy.getNearestCluster(coordinate);
             clusterMonthlyStatistics = nearestCluster.getMonthlyStatistic();
         }
+
+        if (clusterMonthlyStatistics > 30) {
+            clusterMonthlyStatistics = 2;
+        }
+        else if (clusterMonthlyStatistics > 15) {
+            clusterMonthlyStatistics = 1;
+        }
+        else {
+            clusterMonthlyStatistics = 0;
+        }
+
+        Random random = new Random();
+        clusterMonthlyStatistics = Math.abs(random.nextInt()) % 2;
+
 
         Status status = new Status(clusterMonthlyStatistics);
         Gson gson = new Gson();
