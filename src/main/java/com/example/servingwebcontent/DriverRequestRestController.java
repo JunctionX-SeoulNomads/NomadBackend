@@ -35,7 +35,7 @@ public class DriverRequestRestController {
         }
 
         Random random = new Random();
-        clusterStatus = Math.abs(random.nextInt()) % 6;
+        clusterStatus = Math.abs(random.nextInt()) % 5;
 
         Status status = new Status(clusterStatus);
 

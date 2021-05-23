@@ -35,7 +35,7 @@ public class ParkingRequestRestController {
         }
 
         Random random = new Random();
-        clusterMonthlyStatistics = Math.abs(random.nextInt()) % 6;
+        clusterMonthlyStatistics = Math.abs(random.nextInt()) % 5;
 
 
         Status status = new Status(clusterMonthlyStatistics);
