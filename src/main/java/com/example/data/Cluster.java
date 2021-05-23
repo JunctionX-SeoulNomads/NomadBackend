@@ -57,6 +57,10 @@ public class Cluster {
         return aliveCounter.get();
     }
 
+    public SimpleCluster getSimpleCluster() {
+        return new SimpleCluster(clusterId, new Coordinate(clusterCoordinates.getLongitude(), clusterCoordinates.getLatitude()));
+    }
+
     public int getAndResetDailyCounter() {
         int stat = 0;
         synchronized (dailyCounter) {
