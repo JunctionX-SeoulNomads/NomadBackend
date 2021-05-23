@@ -1,6 +1,7 @@
 package com.example.servingwebcontent;
 
 
+import com.example.Main;
 import com.example.data.Cluster;
 import com.example.data.Coordinate;
 import com.example.data.Status;
@@ -34,7 +35,7 @@ public class DriverRequestRestController {
         }
 
         Random random = new Random();
-        clusterStatus = random.nextInt() % 6;
+        clusterStatus = Math.abs(random.nextInt()) % 6;
 
         Status status = new Status(clusterStatus);
 

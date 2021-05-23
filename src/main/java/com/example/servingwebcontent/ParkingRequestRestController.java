@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @RestController
 public class ParkingRequestRestController {
 
@@ -31,6 +33,10 @@ public class ParkingRequestRestController {
             final Cluster nearestCluster = hierarchy.getNearestCluster(coordinate);
             clusterMonthlyStatistics = nearestCluster.getMonthlyStatistic();
         }
+
+        Random random = new Random();
+        clusterMonthlyStatistics = Math.abs(random.nextInt()) % 6;
+
 
         Status status = new Status(clusterMonthlyStatistics);
         Gson gson = new Gson();
