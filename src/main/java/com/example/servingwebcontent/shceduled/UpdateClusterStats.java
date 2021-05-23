@@ -36,4 +36,13 @@ public class UpdateClusterStats {
 
     }
 
+    @Scheduled(fixedDelay = 1 * 60 * 60000)
+    public void showStat() {
+        Map<Integer, Integer> alive = hierarchy.getClustersAliveCounter();
+        for (Integer clusterId : alive.keySet()) {
+            int val = alive.getOrDefault(clusterId, 0);
+            System.out.println("SHOW demon :::: clusterId = " + clusterId + "   val = " + val);
+        }
+    }
+
 }

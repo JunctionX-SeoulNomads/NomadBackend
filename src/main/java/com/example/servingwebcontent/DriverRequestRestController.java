@@ -34,16 +34,16 @@ public class DriverRequestRestController {
             clusterStatus = nearestCluster.getAliveCounter();
         }
 
-        if (clusterStatus > 100) {
+        if (clusterStatus >= 4) {
             clusterStatus = 4;
         }
-        else if (clusterStatus > 80) {
+        else if (clusterStatus >= 3) {
             clusterStatus = 3;
         }
-        else if (clusterStatus > 50) {
+        else if (clusterStatus >= 2) {
             clusterStatus = 2;
         }
-        else if (clusterStatus > 20) {
+        else if (clusterStatus >= 1) {
             clusterStatus = 1;
         }
         else {
