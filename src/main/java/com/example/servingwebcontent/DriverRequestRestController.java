@@ -37,21 +37,15 @@ public class DriverRequestRestController {
         if (clusterStatus >= 4) {
             clusterStatus = 4;
         }
-        else if (clusterStatus >= 3) {
-            clusterStatus = 3;
-        }
         else if (clusterStatus >= 2) {
             clusterStatus = 2;
-        }
-        else if (clusterStatus >= 1) {
-            clusterStatus = 1;
         }
         else {
             clusterStatus = 0;
         }
 
-//        Random random = new Random();
-//        clusterStatus = Math.abs(random.nextInt()) % 5;
+        Random random = new Random();
+        clusterStatus = Math.abs(random.nextInt()) % 3;
 
         Status status = new Status(clusterStatus);
 

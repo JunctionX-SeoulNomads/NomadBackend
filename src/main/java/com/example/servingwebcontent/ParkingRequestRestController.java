@@ -34,24 +34,18 @@ public class ParkingRequestRestController {
             clusterMonthlyStatistics = nearestCluster.getMonthlyStatistic();
         }
 
-        if (clusterMonthlyStatistics > 40) {
-            clusterMonthlyStatistics = 4;
-        }
-        else if (clusterMonthlyStatistics > 30) {
-            clusterMonthlyStatistics = 3;
-        }
-        else if (clusterMonthlyStatistics > 20) {
+        if (clusterMonthlyStatistics > 30) {
             clusterMonthlyStatistics = 2;
         }
-        else if (clusterMonthlyStatistics > 10) {
+        else if (clusterMonthlyStatistics > 15) {
             clusterMonthlyStatistics = 1;
         }
         else {
             clusterMonthlyStatistics = 0;
         }
 
-//        Random random = new Random();
-//        clusterMonthlyStatistics = Math.abs(random.nextInt()) % 5;
+        Random random = new Random();
+        clusterMonthlyStatistics = Math.abs(random.nextInt()) % 2;
 
 
         Status status = new Status(clusterMonthlyStatistics);
