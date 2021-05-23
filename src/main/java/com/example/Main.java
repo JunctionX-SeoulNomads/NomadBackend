@@ -5,6 +5,9 @@ import com.example.database.DatabaseConnectionAwsImpl;
 import com.example.database.NomadDB;
 import com.example.utils.TokensStorage;
 
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class Main {
@@ -23,7 +26,14 @@ public class Main {
 //        awsDB.connect();
 
         NomadDB nomadDB = new NomadDB();
-        nomadDB.getClustersFromDB();
+
+        Map<Integer, Integer> mp_a = new HashMap<>();
+        mp_a.put(6, 171);
+        mp_a.put(4, 71);
+        nomadDB.updateClusterMonthlyStatus(mp_a);
+
+        Date data = new Date(2021, 5, 19);
+        System.out.println(data);
 
     }
 }

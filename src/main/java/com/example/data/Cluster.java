@@ -57,6 +57,15 @@ public class Cluster {
         return aliveCounter.get();
     }
 
+    public int getAndResetDailyCounter() {
+        int stat = 0;
+        synchronized (dailyCounter) {
+            stat = dailyCounter.get();
+            dailyCounter.set(0);
+        }
+        return stat;
+    }
+
     public int getMonthlyStatistic() { return monthlyStatistic; }
 
     public int getClusterId() {

@@ -40,6 +40,16 @@ public class Hierarchy {
         return this;
     }
 
+    public Map<Integer, Integer> getAndResetClustersDailyCounter() {
+        Map<Integer, Integer> dailyCounter = new HashMap<>();
+        for (Cluster cluster : clustersList) {
+            int clusterID = cluster.getClusterId();
+            int counter = cluster.getAndResetDailyCounter();
+            dailyCounter.put(clusterID, counter);
+        }
+        return dailyCounter;
+    }
+
     public Hierarchy saveClustersInfoToDatabase() {
         return this;
     }
