@@ -3,6 +3,7 @@ package com.example.servingwebcontent.shceduled;
 import com.example.database.NomadDB;
 import com.example.servingwebcontent.components.Hierarchy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class UpdateClusterStats {
         this.hierarchy = hierarchy;
     }
 
-//    @Scheduled(fixedDelay = 6 * 60 * 60000)
+    @Scheduled(fixedDelay = 24 * 60 * 60000)
     public void updateClusterMonthlyStats() {
         NomadDB nomadDB = new NomadDB();
 
@@ -26,7 +27,7 @@ public class UpdateClusterStats {
         nomadDB.resetClusterDailyCounter(new ArrayList<>(clusterDailyStatById.keySet()));
     }
 
-//    @Scheduled(fixedDelay = 6 * 60 * 60000)
+    @Scheduled(fixedDelay = 10 * 60 * 60000)
     public void saveClusterDailyStat() {
         Map<Integer, Integer> dailyStat = hierarchy.getAndResetClustersDailyCounter();
         NomadDB nomadDB = new NomadDB();

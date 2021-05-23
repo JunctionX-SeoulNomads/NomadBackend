@@ -34,8 +34,24 @@ public class DriverRequestRestController {
             clusterStatus = nearestCluster.getAliveCounter();
         }
 
-        Random random = new Random();
-        clusterStatus = Math.abs(random.nextInt()) % 5;
+        if (clusterStatus > 100) {
+            clusterStatus = 4;
+        }
+        else if (clusterStatus > 80) {
+            clusterStatus = 3;
+        }
+        else if (clusterStatus > 50) {
+            clusterStatus = 2;
+        }
+        else if (clusterStatus > 20) {
+            clusterStatus = 1;
+        }
+        else {
+            clusterStatus = 0;
+        }
+
+//        Random random = new Random();
+//        clusterStatus = Math.abs(random.nextInt()) % 5;
 
         Status status = new Status(clusterStatus);
 

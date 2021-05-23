@@ -26,7 +26,7 @@ public class ServingWebContentApplication {
 
         System.out.println("\nDriver::::\n");
         System.out.println(gson.toJson(coordinate));
-        System.out.println(NomadUtils.httpsPOSTRequest("http://localhost:8080/driver", gson.toJson(coordinate).getBytes()));
+        System.out.println(NomadUtils.httpsPOSTRequest("http://localhost:8080/parking", gson.toJson(coordinate).getBytes()));
 
         while (true) {
 //            System.out.println("\nDriver::::\n");
